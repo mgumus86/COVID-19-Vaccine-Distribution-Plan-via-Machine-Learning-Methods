@@ -1,4 +1,4 @@
-# Optimizing COVID-19 Vaccine Distribution in the U.S.
+# Optimizing COVID-19 Vaccine Distribution in the U.S. (Based on 2021 - 2022)
 
 This project presents a data-driven approach to optimize vaccine allocation across U.S. states to minimize COVID-19 mortality. By leveraging demographic data (age, sex, ethnicity) and historical death rates, we build a machine learning model that proposes a more effective vaccine distribution strategy than existing guidelines.
 
