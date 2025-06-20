@@ -1,70 +1,48 @@
-# Covid-19
-## Live
- Live server- [http://206.189.202.125:3000/](http://206.189.202.125:3000/) - requires manually updating, so may not be up to date
- 
-##  Local Installation
-Required programs - if you're using windows let me know, installation of some of these might be harder
-| Program |
-| ------ |
-| Python | 
-| pip   |
-| npm   |
-|git|
+# Optimizing COVID-19 Vaccine Distribution in the U.S.
 
-npm can be installed with
+This project presents a data-driven approach to optimize vaccine allocation across U.S. states to minimize COVID-19 mortality. By leveraging demographic data (age, sex, ethnicity) and historical death rates, we build a machine learning model that proposes a more effective vaccine distribution strategy than existing guidelines.
 
-Linux - ```apt-get install npm```
+Developed as a final project for ISyE 6740 (Computational Data Analytics) at Georgia Tech.
 
-Mac - ```brew install npm```
+---
 
-git can be installed with
+## 🎯 Objectives
 
-```brew install git```
+- Estimate COVID-19 death probability per demographic group using CDC data.
+- Compute each U.S. state’s cumulative death risk by combining demographic risk and population.
+- Compare the proposed optimized allocation with the real-world allocation using a random forest model.
+- Demonstrate the effectiveness of data-informed distribution strategies.
 
+---
 
-Pip modules we need - (use pip3/python3 -m pip if need be)
-```sh
-pip install flask
-pip install flask_cors
-pip install pandas
-pip install sklearn
-```
-### Clone the repo
-I'm assuming you're cloning this in your home directory - you don't have to but a few of the commands I've listed include ```~``` so you can copy paste them if you install it there
+## 🧠 Methodology
 
-run ```git clone https://github.com/aj-brooks/AJMR.git```
+### Step 1: Predict Death Probability by Demographics
+- Cleaned and processed >600k entries from CDC Surveillance data.
+- Applied:
+  - Random Forest (AUC = 0.9185, Accuracy = 95.51%)
+  - Logistic Regression
+  - Naive Bayes
+- Selected Random Forest for best performance.
 
-You will be prompted for you username and password. Enter your git username. You password is actually an access token you must create, not your git password.
+### Step 2: Rank States by Risk
+- Used U.S. Census 2019 population data.
+- Estimated expected deaths for each demographic group in each state.
+- Ranked states by cumulative risk (assuming no mitigation).
 
-https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+### Step 3: Simulate and Compare Allocation Strategies
+- Built Random Forest model to estimate death outcomes based on vaccine allocation per state.
+- Compared actual CDC-guided plan vs. our risk-prioritized proposal using weekly death counts.
 
-Once cloned, go into the server repo and start flask.
+---
 
-``` sh 
-cd ~/AJMR/server
-export FLASK_APP=app.py
-flask run
-```
+## 📊 Results
 
-After taking a few moments to load the saved models, you should see - 
-
-``` * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)```
-
-Open  http://127.0.0.1:5000/data/all-age?model=naive-bayes&sex=male&race=bn in your browser
-
-If you get a json object, its working!
-
-Now we need to start the frontend. Leave flask running - in a new terminal tab, run
-
-```cd ~/AJMR/frontend/ajmr``` (not just frontend)
-
-Run `npm install`. This will download all the dependecies for the project, kind of like pip (but easier)
-
-Then, run `npm start`. Your browser should open in a few moments to the page.
+- **Projected deaths avoided:** ~3,017 fewer deaths (2.7% improvement).
+- **High-risk group:** Hispanic/Latino males, 80+ (55% death probability).
+- **Top high-risk state:** Florida, with ~6.98% projected mortality if unvaccinated.
 
 
-## Building models
 
-To reduce startup time, we've included the serialized models in the repo. If you want to re-train them,  cd into `server/models`. Delete the models and  run `python train.py`. You'll need to restart flask to have it import the new models. Note that while this is in the server folder, its really just its own script.  
 
 
