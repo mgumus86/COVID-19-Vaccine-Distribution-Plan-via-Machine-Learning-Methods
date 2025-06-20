@@ -43,6 +43,80 @@ Developed as a final project for ISyE 6740 (Computational Data Analytics) at Geo
 - **Top high-risk state:** Florida, with ~6.98% projected mortality if unvaccinated.
 
 
+## 🚀 Getting Started
+
+This section provides a step-by-step guide to set up the project locally, train machine learning models, and launch the full web dashboard.
+
+---
+
+### 🔧 Prerequisites
+
+Make sure you have the following installed:
+
+- Python 3.x  
+- pip (Python package manager)  
+- Node.js and npm (for the frontend)  
+- Git (for cloning the repository)  
+
+You can install them on macOS using:
+
+```bash
+brew install python node git
+```
+
+---
+
+## 📁 Clone the Repository
+
+```bash
+git clone https://github.com/mgumus86/COVID-19-Vaccine-Distribution-Plan-via-Machine-Learning-Methods.git
+cd COVID-19-Vaccine-Distribution-Plan-via-Machine-Learning-Methods
+```
+
+---
 
 
 
+## 🧠 Step 1: Train the Machine Learning Models
+Navigate to the model training directory:
+
+```bash
+cd server/models
+python train.py
+```
+
+This script will train three models: Random Forest, Naive Bayes, and Logistic Regression
+
+Save them as .sav files for use by the backend
+
+---
+
+
+## 🔁 Step 2: Start the Flask Backend
+After training is complete, start the backend:
+
+```bash
+cd ..
+export FLASK_APP=app.py      # Use 'set FLASK_APP=app.py' on Windows
+flask run
+```
+
+The backend will be available at:
+
+http://127.0.0.1:5000/
+✅ Test it in your browser:
+
+http://127.0.0.1:5000/data/all-age?model=naive-bayes&sex=male&race=bn
+You should see a JSON response.
+
+---
+
+
+🌐 Step 3: Start the React Frontend
+In a new terminal window:
+
+```bash
+cd frontend/ajmr
+npm install      # Only needed the first time
+npm start
+```
